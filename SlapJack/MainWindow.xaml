@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:SlapJack"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Background>
+        <ImageBrush ImageSource="Images/backGround.jpg"/>
+    </Window.Background>
     <Grid>
         
     </Grid>
