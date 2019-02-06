@@ -63,6 +63,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Card.cs" />
+    <Compile Include="Deck.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -99,6 +101,63 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Sound\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Cards\10_of_clubs.png" />
+    <Resource Include="Images\Cards\10_of_diamonds.png" />
+    <Resource Include="Images\Cards\10_of_hearts.png" />
+    <Resource Include="Images\Cards\10_of_spades.png" />
+    <Resource Include="Images\Cards\2_of_clubs.png" />
+    <Resource Include="Images\Cards\2_of_diamonds.png" />
+    <Resource Include="Images\Cards\2_of_hearts.png" />
+    <Resource Include="Images\Cards\2_of_spades.png" />
+    <Resource Include="Images\Cards\3_of_clubs.png" />
+    <Resource Include="Images\Cards\3_of_diamonds.png" />
+    <Resource Include="Images\Cards\3_of_hearts.png" />
+    <Resource Include="Images\Cards\3_of_spades.png" />
+    <Resource Include="Images\Cards\4_of_clubs.png" />
+    <Resource Include="Images\Cards\4_of_diamonds.png" />
+    <Resource Include="Images\Cards\4_of_hearts.png" />
+    <Resource Include="Images\Cards\4_of_spades.png" />
+    <Resource Include="Images\Cards\5_of_clubs.png" />
+    <Resource Include="Images\Cards\5_of_diamonds.png" />
+    <Resource Include="Images\Cards\5_of_hearts.png" />
+    <Resource Include="Images\Cards\5_of_spades.png" />
+    <Resource Include="Images\Cards\6_of_clubs.png" />
+    <Resource Include="Images\Cards\6_of_diamonds.png" />
+    <Resource Include="Images\Cards\6_of_hearts.png" />
+    <Resource Include="Images\Cards\6_of_spades.png" />
+    <Resource Include="Images\Cards\7_of_clubs.png" />
+    <Resource Include="Images\Cards\7_of_diamonds.png" />
+    <Resource Include="Images\Cards\7_of_hearts.png" />
+    <Resource Include="Images\Cards\7_of_spades.png" />
+    <Resource Include="Images\Cards\8_of_clubs.png" />
+    <Resource Include="Images\Cards\8_of_diamonds.png" />
+    <Resource Include="Images\Cards\8_of_hearts.png" />
+    <Resource Include="Images\Cards\8_of_spades.png" />
+    <Resource Include="Images\Cards\9_of_clubs.png" />
+    <Resource Include="Images\Cards\9_of_diamonds.png" />
+    <Resource Include="Images\Cards\9_of_hearts.png" />
+    <Resource Include="Images\Cards\9_of_spades.png" />
+    <Resource Include="Images\Cards\ace_of_clubs.png" />
+    <Resource Include="Images\Cards\ace_of_diamonds.png" />
+    <Resource Include="Images\Cards\ace_of_hearts.png" />
+    <Resource Include="Images\Cards\ace_of_spades.png" />
+    <Resource Include="Images\Cards\back.png" />
+    <Resource Include="Images\Cards\black_joker.png" />
+    <Resource Include="Images\Cards\jack_of_clubs.png" />
+    <Resource Include="Images\Cards\jack_of_diamonds.png" />
+    <Resource Include="Images\Cards\jack_of_hearts.png" />
+    <Resource Include="Images\Cards\jack_of_spades.png" />
+    <Resource Include="Images\Cards\king_of_clubs.png" />
+    <Resource Include="Images\Cards\king_of_diamonds.png" />
+    <Resource Include="Images\Cards\king_of_hearts.png" />
+    <Resource Include="Images\Cards\king_of_spades.png" />
+    <Resource Include="Images\Cards\queen_of_clubs.png" />
+    <Resource Include="Images\Cards\queen_of_diamonds.png" />
+    <Resource Include="Images\Cards\queen_of_hearts.png" />
+    <Resource Include="Images\Cards\queen_of_spades.png" />
+    <Resource Include="Images\Cards\red_joker.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
