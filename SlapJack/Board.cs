@@ -73,8 +73,7 @@ namespace Slapjack
             }
         }
         //get a player
-        //used by SlapJack to call methods on the player
-
+        
         public Player getPlayer(int playerNum)
 
         {
