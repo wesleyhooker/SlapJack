@@ -160,5 +160,11 @@
     <Resource Include="Images\Cards\queen_of_spades.png" />
     <Resource Include="Images\Cards\red_joker.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\menu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\info.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

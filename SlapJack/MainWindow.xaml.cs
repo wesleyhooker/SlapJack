@@ -24,5 +24,27 @@ namespace SlapJack
         {
             InitializeComponent();
         }
+
+        private void ImgPile_MouseEnter(object sender, MouseEventArgs e)
+        {
+            //Highlight the Card
+            borderImgPile.BorderBrush = Brushes.Yellow;
+            txtImgPile.Visibility = Visibility.Visible;
+            imgPile.Opacity = 50;
+        }
+        private void BorderImgPile_MouseLeave(object sender, MouseEventArgs e)
+        {
+            //UnHighlight the Card
+            borderImgPile.BorderBrush = null;
+            txtImgPile.Visibility = Visibility.Hidden;
+            imgPile.Opacity = 100;
+        }
+
+        private void ImgPile_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            //Select the Card
+        }
+
+
     }
 }

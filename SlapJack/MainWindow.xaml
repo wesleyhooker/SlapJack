@@ -5,11 +5,75 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SlapJack"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="SlapJack" Height="721.35" Width="1018.1" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Window.Background>
         <ImageBrush ImageSource="Images/backGround.jpg"/>
     </Window.Background>
+    <!--MAIN GRID-->
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <!--CARDS ON SCREEN-->
+        <Image x:Name="imgPlayerCard" HorizontalAlignment="center" Width="140" Height="195" VerticalAlignment="bottom"  Grid.Column="1"  Grid.Row="1" Source="Images/Cards/back.png" Margin="145.4,0,148.2,3" Grid.RowSpan="2">
+            <Image.Effect>
+                <DropShadowEffect/>
+            </Image.Effect>
+        </Image>
+        <Image x:Name="imgNpc1" HorizontalAlignment="left" Width="140" Height="195" VerticalAlignment="center"  Grid.Column="1"  Grid.Row="1" Source="Images/Cards/back.png" Margin="95.4,77.4,0,24.4" >
+            <Image.Effect>
+                <DropShadowEffect/>
+            </Image.Effect>
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image x:Name="imgNpc2" HorizontalAlignment="center"  VerticalAlignment="top"  Grid.Column="1" Source="Images/Cards/back.png" Margin="145.4,3,148.2,0" Height="195" Grid.RowSpan="2" Width="140">
+            <Image.Effect>
+                <DropShadowEffect/>
+            </Image.Effect>
+        </Image>
+        <Image x:Name="imgNpc3" Width="140" Height="195" VerticalAlignment="center"  Grid.Column="2"  Grid.Row="1" Source="Images/Cards/back.png" Margin="100,50,0,0" HorizontalAlignment="Left" >
+            <Image.Effect>
+                <DropShadowEffect/>
+            </Image.Effect>
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Border x:Name="borderImgPile" Visibility="Visible" BorderThickness="10" CornerRadius="10" Grid.Column="1" HorizontalAlignment="Center" Margin="0,40,0,40" Grid.Row="1" VerticalAlignment="Center" MouseLeave="BorderImgPile_MouseLeave">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="199"/>
+            </Border.Effect>
+            <Image x:Name="imgPile" Grid.Column="1" Grid.Row="1" Source="Images/Cards/10_of_clubs.png"  Cursor="Hand" MouseEnter="ImgPile_MouseEnter" MouseDown="ImgPile_MouseDown">
+                <Image.Effect>
+                    <DropShadowEffect/>
+                </Image.Effect>
+            </Image>
+        </Border>
+
+
+        <!--RECTANGLES ON SIDES-->
+        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="10000" Stroke="Black" VerticalAlignment="Top" Width="175" Grid.RowSpan="3"/>
+        <Rectangle Fill="Black" Height="10000" Stroke="Black" VerticalAlignment="Top" Width="175" Grid.RowSpan="3" Grid.Column="2" HorizontalAlignment="Right"/>
+        <TextBox Visibility="Hidden" x:Name="txtImgPile" Grid.Column="1" HorizontalAlignment="Center"  Grid.Row="1" TextWrapping="Wrap" Text="SLAP" VerticalAlignment="Center" Height="100" Width="308" Foreground="Black" Background="{x:Null}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Focusable="False" IsTabStop="False" FontSize="48" Margin="65.4,92.4,60.2,104.4" FontWeight="Bold" FontFamily="Wide Latin" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand"/>
     </Grid>
 </Window>
