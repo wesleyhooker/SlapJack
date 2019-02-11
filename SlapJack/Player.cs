@@ -10,12 +10,12 @@ namespace SlapJack
     {
 
         public List<Card> hand;
-        public bool isElminated { get; set; }
+        public bool isEliminated { get; set; }
         public Random rng;
 
         public Player()
         {
-            isElminated = false;
+            isEliminated = false;
             rng = new Random();
         }
 
