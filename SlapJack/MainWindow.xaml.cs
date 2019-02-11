@@ -29,7 +29,7 @@ namespace SlapJack
         /// <summary>
         /// Game Logic
         /// </summary>
-        Bored slapJack;
+        Board slapJack;
         #endregion
 
 
@@ -52,7 +52,7 @@ namespace SlapJack
             //Allow Buttons to be pressed
             imgPlayerCard.IsEnabled = true;
             canImgPile.IsEnabled = true;
-            slapJack = new Bored();
+            slapJack = new Board();
 
             //Reset timer
             if (roundTimer != null)
