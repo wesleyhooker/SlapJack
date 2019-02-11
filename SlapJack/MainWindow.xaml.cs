@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Timers;
 
 namespace SlapJack
 {
@@ -20,31 +21,43 @@ namespace SlapJack
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region VARIABLES
+        /// <summary>
+        /// Keeps Track of inGame Time
+        /// </summary>
+        Timer timer;
+        #endregion
+
+
+
+        #region METHODS
         public MainWindow()
         {
             InitializeComponent();
+
+            // Create a timer with a two second interval.
+            timer = new System.Timers.Timer(2000);
+            // Hook up the Elapsed event for the timer. 
+            //timer.Elapsed += OnTimedEvent; The function to be called when 2 seconds finishes
+            timer.AutoReset = true;
+            timer.Enabled = true;
         }
 
-        private void ImgPile_MouseEnter(object sender, MouseEventArgs e)
+        private void CanImgPile_MouseEnter(object sender, MouseEventArgs e)
         {
             //Highlight the Card
             borderImgPile.BorderBrush = Brushes.Yellow;
             txtImgPile.Visibility = Visibility.Visible;
-            imgPile.Opacity = 50;
+            imgPile.Opacity = 0.9;
         }
-        private void BorderImgPile_MouseLeave(object sender, MouseEventArgs e)
+
+        private void CanImgPile_MouseLeave(object sender, MouseEventArgs e)
         {
             //UnHighlight the Card
             borderImgPile.BorderBrush = null;
             txtImgPile.Visibility = Visibility.Hidden;
-            imgPile.Opacity = 100;
+            imgPile.Opacity = 1;
         }
-
-        private void ImgPile_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            //Select the Card
-        }
-
-
+        #endregion
     }
 }
