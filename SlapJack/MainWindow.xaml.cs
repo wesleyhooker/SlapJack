@@ -69,7 +69,38 @@ namespace SlapJack
         /// <param name="e"></param>
         private void ImgPlayerCard_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            //Place hand card on top of pile (Update UI)
+            //Start timer for players to place card
+            while (true)//Not the players turn
+            {
+                SetTimer();
+            }
+        }
 
+        /// <summary>
+        /// Slaps the top card on the pile.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CanImgPile_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            //reset Timer
+            while (true) //Not the players turn
+            {
+                SetTimer();
+            }
+
+            //Checks for a good or bad slap
+            if ("Jack" == "Jack")
+            {
+                //Add the pile to the player/NPC Hand
+                //Check for out Players/win
+            }
+            else //Not a jack
+            {
+                //Place card from player/NPC Hand to Pile
+                //check for out players/win
+            }
         }
 
         /// <summary>
@@ -99,16 +130,26 @@ namespace SlapJack
         }
         #endregion
 
+        #region HELPER METHODS
+        /// <summary>
+        /// Places The card on the top of the hand into the pile.
+        /// </summary>
+        /// <param name="player"></param>
+        private void PlaceCardInPile(Player player)
+        {
+
+        }
+        #endregion
 
         #region TIMER METHODS
         private static void SetTimer()
         {
             // Create a timer with a two second interval.
-            roundTimer = new System.Timers.Timer(2000);
+            roundTimer = new Timer(2000);
             // Hook up the Elapsed event for the timer. 
-            roundTimer.Elapsed += OnTimedEvent;
-            roundTimer.AutoReset = true;
+            roundTimer.AutoReset = false;
             roundTimer.Enabled = true;
+            roundTimer.Elapsed += OnTimedEvent;
         }
 
         /// <summary>
@@ -118,6 +159,7 @@ namespace SlapJack
         /// <param name="e"></param>
         private static void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
+            //Place NPC Hand card to top of pile.
         }
         #endregion
     }

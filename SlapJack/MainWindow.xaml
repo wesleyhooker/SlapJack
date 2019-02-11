@@ -66,7 +66,7 @@
             <Border.Effect>
                 <DropShadowEffect BlurRadius="199"/>
             </Border.Effect>
-            <Canvas x:Name="canImgPile" IsEnabled="False" Height="278" Width="190" MouseEnter="CanImgPile_MouseEnter" MouseLeave="CanImgPile_MouseLeave">
+            <Canvas x:Name="canImgPile" IsEnabled="False" Height="278" Width="190" MouseEnter="CanImgPile_MouseEnter" MouseLeave="CanImgPile_MouseLeave" PreviewMouseDown="CanImgPile_PreviewMouseDown" >
                 <Viewbox Height="278" Width=" 190" >
                     <Image x:Name="imgPile" Grid.Column="1" Grid.Row="1" Source="Images/Cards/10_of_clubs.png"  Cursor="Hand" Canvas.Left="-65" Canvas.Top="-132">
                         <Image.Effect>
