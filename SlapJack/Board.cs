@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace Slapjack
+namespace SlapJack
 {
-    public class Board
-
+    class Board
     {
         private static int MAX_PLAYERS = 2;
         private List<Card> pile;
@@ -57,8 +57,10 @@ namespace Slapjack
             //deal players their cards
 
             deck = new Deck();
+            List<Card> tempDeck = deck.deck;
 
-            Card nextCard = deck.deal();
+            Card nextCard = tempDeck[0];
+            tempDeck.RemoveAt(0);
 
             while (nextCard != null)
 
@@ -68,12 +70,13 @@ namespace Slapjack
                 {
                     players[playerId].receiveCard(nextCard);
 
-                    nextCard = deck.deal();
+                    nextCard = tempDeck[0];
+                    tempDeck.RemoveAt(0);
                 }
             }
         }
         //get a player
-        
+
         public Player getPlayer(int playerNum)
 
         {
