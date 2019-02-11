@@ -9,7 +9,7 @@ namespace SlapJack
     class Board
     {
         private static int MAX_PLAYERS = 2;
-        private List<Card> pile;
+        public List<Card> pile;
         public List<Player> players { get; }
         private Deck deck;
         public int lastPlayed { get; set; }

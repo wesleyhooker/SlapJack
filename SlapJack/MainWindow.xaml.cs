@@ -69,11 +69,16 @@ namespace SlapJack
         /// <param name="e"></param>
         private void ImgPlayerCard_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            //Place hand card on top of pile (Update UI)
-            //Start timer for players to place card
-            while (true)//Not the players turn
+            if (slapJack.lastPlayed == 0) //if it is the players turn
             {
-                SetTimer();
+                //Place Player card on top of pile
+                PlaceCardInPile(slapJack.players[0]);
+
+                //Start timer for players to place card
+                while (false)//Not the players turn
+                {
+                    SetTimer();
+                }
             }
         }
 
@@ -130,6 +135,7 @@ namespace SlapJack
         }
         #endregion
 
+
         #region HELPER METHODS
         /// <summary>
         /// Places The card on the top of the hand into the pile.
@@ -137,9 +143,14 @@ namespace SlapJack
         /// <param name="player"></param>
         private void PlaceCardInPile(Player player)
         {
-
+            slapJack.addCard(player.PlayCard());
+            
+            //Pile Card Image
+            string sCardURI = @"\Images\Cards\" + slapJack.pile[0] + ".png";
+            imgPile.Source = new BitmapImage(new Uri(sCardURI));
         }
         #endregion
+
 
         #region TIMER METHODS
         private static void SetTimer()
