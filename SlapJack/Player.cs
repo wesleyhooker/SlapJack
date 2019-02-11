@@ -27,6 +27,12 @@ namespace SlapJack
             return playedCard;
         }
 
+        //Takes card and adds it to players hand
+        public void receiveCard(Card card)
+        {
+            hand.Add(card);            
+        }
+
         //Takes card(s) from the passed in pile and adds it to players hand
         public void GetCards(List<Card> pile)
         {            
@@ -61,6 +67,12 @@ namespace SlapJack
             }
 
 
+        }
+
+        //Returns the count for the players hand
+        public int getHandCount()
+        {
+            return hand.Count;
         }
 
 

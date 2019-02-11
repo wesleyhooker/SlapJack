@@ -101,7 +101,7 @@ namespace SlapJack
             if (slapValidity)
 
             {
-                getPlayer(playerId).addToBottom(pile);
+                getPlayer(playerId).GetCards(pile);
 
                 Console.WriteLine("Player " + playerId + "'s slap succeded! He added " + pile.Count + " cards to his hand");
 
