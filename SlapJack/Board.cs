@@ -93,6 +93,10 @@ namespace SlapJack
         }
 
 
+    
+        /// <param name="playerId">The id of the player who slapped</param>
+        /// <returns> true if the players slap is valid.false it is not</returns>
+
         public bool playerSlapped(int playerId)
 
         {
@@ -148,7 +152,7 @@ namespace SlapJack
 
         /// </summary>
 
-        /// <returns>-1 if there is no winner or the id of the player that won</returns>
+        /// <returns>-1 if there is no winner or the id of the player that won </returns>
 
         public int checkWinner()
 

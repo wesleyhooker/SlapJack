@@ -27,6 +27,18 @@ namespace SlapJack
             return playedCard;
         }
 
+        public Card Flip()
+        {
+            if (hand.Count> 0)
+            {
+                Card card = hand[0];
+                hand.Remove(card);
+                return card;
+            } // else player loses 
+
+            return null;
+        }
+
         //Takes card and adds it to players hand
         public void receiveCard(Card card)
         {
