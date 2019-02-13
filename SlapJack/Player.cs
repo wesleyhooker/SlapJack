@@ -22,9 +22,13 @@ namespace SlapJack
         //Returns a card to be put in the pile
         public Card PlayCard()
         {
+            if (hand.Count != 0)
+            {
             Card playedCard = hand[0];
             hand.RemoveAt(0);
             return playedCard;
+            }
+            return null;
         }
 
         public Card Flip()

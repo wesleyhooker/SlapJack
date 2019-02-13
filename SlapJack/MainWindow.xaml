@@ -24,7 +24,7 @@
         </Grid.ColumnDefinitions>
 
         <!--CARDS ON SCREEN-->
-        <Image x:Name="imgPlayerCard" HorizontalAlignment="center" Width="140" Height="195" VerticalAlignment="bottom"  Grid.Column="2"  Grid.Row="1" Source="Images/Cards/back.png" Margin="145,0,148,3" Grid.RowSpan="2" MouseDown="ImgPlayerCard_MouseDown" IsEnabled="False">
+        <Image x:Name="imgPlayerCard" HorizontalAlignment="center" Width="140" Height="195" VerticalAlignment="bottom"  Grid.Column="2"  Grid.Row="1" Source="Images/Cards/back.png" Margin="145,0,148,3" Grid.RowSpan="2" MouseDown="PlayCard" IsEnabled="False">
             <Image.Effect>
                 <DropShadowEffect/>
             </Image.Effect>
@@ -66,9 +66,9 @@
             <Border.Effect>
                 <DropShadowEffect BlurRadius="199"/>
             </Border.Effect>
-            <Canvas x:Name="canImgPile" IsEnabled="False" Height="278" Width="190" MouseEnter="CanImgPile_MouseEnter" MouseLeave="CanImgPile_MouseLeave" PreviewMouseDown="CanImgPile_PreviewMouseDown" >
+            <Canvas x:Name="canImgPile" IsEnabled="False" Height="278" Width="190" MouseEnter="CanImgPile_MouseEnter" MouseLeave="CanImgPile_MouseLeave" PreviewMouseDown="Slap" >
                 <Viewbox Height="278" Width=" 190" >
-                    <Image x:Name="imgPile" Grid.Column="1" Grid.Row="1" Source="Images/Cards/10_of_clubs.png"  Cursor="Hand" Canvas.Left="-65" Canvas.Top="-132">
+                    <Image x:Name="imgPile" Grid.Column="1" Grid.Row="1"  Cursor="Hand" Canvas.Left="-65" Canvas.Top="-132">
                         <Image.Effect>
                             <DropShadowEffect/>
                         </Image.Effect>
