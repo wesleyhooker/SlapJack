@@ -90,15 +90,16 @@ namespace SlapJack
         private void CanImgPile_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             //reset Timer
-            while (true) //Not the players turn
+            while (false) //Not the players turn
             {
                 SetTimer();
             }
 
             //Checks for a good or bad slap
-            if ("Jack" == "Jack")
+            if (slapJack.pile[0].Face == "Jack")
             {
                 //Add the pile to the player/NPC Hand
+                slapJack.players[0].GetCards(slapJack.pile);
                 //Check for out Players/win
             }
             else //Not a jack
@@ -146,8 +147,8 @@ namespace SlapJack
             slapJack.addCard(player.PlayCard());
             
             //Pile Card Image
-            string sCardURI = @"\Images\Cards\" + slapJack.pile[0] + ".png";
-            imgPile.Source = new BitmapImage(new Uri(sCardURI));
+            string sCardURI = @"Images/Cards/" + slapJack.pile[0];
+            imgPile.Source = new BitmapImage(new Uri(sCardURI, UriKind.RelativeOrAbsolute));
         }
         #endregion
 
