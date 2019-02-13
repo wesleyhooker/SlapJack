@@ -12,9 +12,11 @@ namespace SlapJack
         public List<Card> hand = new List<Card>();
         public bool isEliminated { get; set; }
         public Random rng;
+        public int id;
 
-        public Player()
+        public Player(int id)
         {
+            this.id = id;
             isEliminated = false;
             rng = new Random();
         }

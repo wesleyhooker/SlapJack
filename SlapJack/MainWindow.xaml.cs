@@ -78,7 +78,7 @@ namespace SlapJack
                     PlaceCardInPile(slapJack.players[0]);
                 }
                 else
-                {
+                {     
                     return;
                 }
 
@@ -113,6 +113,7 @@ namespace SlapJack
                 slapJack.players[slapJack.pile.Count-1].GetCards(slapJack.pile);
                 imgPile = null;
                 //Check for Player win
+
             }
             else //Not a jack
             {
@@ -164,6 +165,26 @@ namespace SlapJack
             slapJack.addCard(player.PlayCard());
 
             //Pile Card Image
+            if (player.getHandCount() == 0)
+            {
+                switch (player.id)
+                {
+                    case 0:
+                        imgPlayerCard.Source = null;
+                        break;
+                    case 1:
+                        imgNpc1.Source = null;
+                        break;
+                    case 2:
+                        imgNpc2.Source = null;
+                        break;
+                    case 3:
+                        imgNpc3.Source = null;
+                        break;
+                    default:
+                        break;
+                }
+            }
             string sCardURI = @"Images/Cards/" + slapJack.pile[0];
             imgPile.Source = new BitmapImage(new Uri(sCardURI, UriKind.RelativeOrAbsolute));
         }
