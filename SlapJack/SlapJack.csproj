@@ -101,9 +101,7 @@
   <ItemGroup>
     <Resource Include="Images\backGround.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Sound\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\Cards\10_of_clubs.png" />
     <Resource Include="Images\Cards\10_of_diamonds.png" />
@@ -166,6 +164,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Sounds\deal.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

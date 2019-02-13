@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Timers;
+using System.Media;
 
 namespace SlapJack
 {
@@ -80,6 +81,9 @@ namespace SlapJack
                 {
                     return;
                 }
+
+                SoundPlayer simpleSound = new SoundPlayer("../../Sounds/deal.wav");
+                simpleSound.Play();
 
                 //Start timer for players to place card
                 while (false)//Not the players turn
