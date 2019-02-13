@@ -8,7 +8,7 @@ namespace SlapJack
 {
     class Board
     {
-        private static int MAX_PLAYERS = 2;
+        private static int MAX_PLAYERS = 4;
         public List<Card> pile;
         public List<Player> players { get; }
         private Deck deck;
@@ -52,7 +52,7 @@ namespace SlapJack
 
                 players.Add(new Player());
 
-            lastPlayed = 2;
+            lastPlayed = 0;
 
             //deal players their cards
 
@@ -63,15 +63,20 @@ namespace SlapJack
             tempDeck.RemoveAt(0);
 
             while (nextCard != null)
-
             {
                 for (int playerId = 0; playerId < MAX_PLAYERS; playerId++)
-
                 {
                     players[playerId].receiveCard(nextCard);
 
+                    if (tempDeck.Count != 0)
+                    {
                     nextCard = tempDeck[0];
                     tempDeck.RemoveAt(0);
+                    }
+                    else
+                    {
+                        nextCard = null;
+                    }
                 }
             }
         }

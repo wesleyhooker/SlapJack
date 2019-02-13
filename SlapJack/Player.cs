@@ -9,7 +9,7 @@ namespace SlapJack
     class Player
     {
 
-        public List<Card> hand;
+        public List<Card> hand = new List<Card>();
         public bool isEliminated { get; set; }
         public Random rng;
 
