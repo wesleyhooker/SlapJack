@@ -51,8 +51,9 @@ namespace SlapJack
            for (int i = 0; i < pile.Count; i++)
             {
                 Card gotCard = pile[i];
-                hand.Add(gotCard);
+                hand.Add(gotCard);                
             }
+            pile.Clear();
         }
 
         //Gives a double between the min and max values to determine how long until a player slaps
