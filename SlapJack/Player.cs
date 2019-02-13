@@ -95,5 +95,26 @@ namespace SlapJack
         }
 
 
+        public bool Elimanate()
+        {
+            if (isEliminated)
+            {
+                return isEliminated;
+            }
+            else
+            {
+                if (hand.Count == 0)
+                {
+                    isEliminated = true;
+                    return isEliminated;
+                }
+                else
+                {
+                    return isEliminated;
+                }
+            }
+        }
+
+
     }
 }
