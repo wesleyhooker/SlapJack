@@ -49,8 +49,9 @@ namespace SlapJack
             players = new List<Player>();
 
             for (int playerId = 0; playerId < MAX_PLAYERS; playerId++)
-
-                players.Add(new Player());
+            {
+                players.Add(new Player(playerId));
+            }
 
             lastPlayed = 0;
 
