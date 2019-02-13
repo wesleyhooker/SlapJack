@@ -18,6 +18,7 @@ namespace SlapJack
 
             deck = new List<Card>();
             FillDeck();
+            Shuffle();
         }
 
         /// <summary>
@@ -82,7 +83,6 @@ namespace SlapJack
             int card1;
             Card temp;
             int card2;
-
 
             for (int i = 0; i < numSwaps; i++)
             {
