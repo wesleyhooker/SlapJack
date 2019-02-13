@@ -53,7 +53,7 @@ namespace SlapJack
                 Card gotCard = pile[i];
                 hand.Add(gotCard);                
             }
-            pile.Clear();
+            pile.Clear();           
         }
 
         //Gives a double between the min and max values to determine how long until a player slaps
