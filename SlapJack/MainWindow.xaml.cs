@@ -67,12 +67,19 @@ namespace SlapJack
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ImgPlayerCard_MouseDown(object sender, MouseButtonEventArgs e)
+        private void PlayCard(object sender, MouseButtonEventArgs e)
         {
             if (slapJack.lastPlayed == 0) //if it is the players turn
             {
                 //Place Player card on top of pile
-                PlaceCardInPile(slapJack.players[0]);
+                if (slapJack.players[0].getHandCount() != 0)
+                {
+                    PlaceCardInPile(slapJack.players[0]);
+                }
+                else
+                {
+                    return;
+                }
 
                 //Start timer for players to place card
                 while (false)//Not the players turn
@@ -87,7 +94,7 @@ namespace SlapJack
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CanImgPile_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void Slap(object sender, MouseButtonEventArgs e)
         {
             //reset Timer
             while (false) //Not the players turn
@@ -99,7 +106,8 @@ namespace SlapJack
             if (slapJack.pile[0].Face == "Jack")
             {
                 //Add the pile to the player/NPC Hand
-                slapJack.players[0].GetCards(slapJack.pile);
+                slapJack.players[slapJack.pile.Count-1].GetCards(slapJack.pile);
+                imgPile = null;
                 //Check for out Players/win
             }
             else //Not a jack
