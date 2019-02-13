@@ -108,12 +108,17 @@ namespace SlapJack
                 //Add the pile to the player/NPC Hand
                 slapJack.players[slapJack.pile.Count-1].GetCards(slapJack.pile);
                 imgPile = null;
-                //Check for out Players/win
+                //Check for Player win
             }
             else //Not a jack
             {
-                //Place card from player/NPC Hand to Pile
-                //check for out players/win
+                //Place card from player Hand to Pile
+                PlaceCardInPile(slapJack.players[0]);
+                //check for player loss
+                if (slapJack.players[0].getHandCount() == 0)
+                {
+                    GameResult("LOSE");
+                }
             }
         }
 
@@ -153,10 +158,25 @@ namespace SlapJack
         private void PlaceCardInPile(Player player)
         {
             slapJack.addCard(player.PlayCard());
-            
+
             //Pile Card Image
             string sCardURI = @"Images/Cards/" + slapJack.pile[0];
             imgPile.Source = new BitmapImage(new Uri(sCardURI, UriKind.RelativeOrAbsolute));
+        }
+
+        private void GameResult(string WinOrLose)
+        {
+            imgPlayerCard.IsEnabled = false;
+            canImgPile.IsEnabled = false;
+            slapJack = null;
+            if (WinOrLose == "WIN")
+            {
+                txtWinOrLose.Text = "YOU WIN";
+            }
+            else
+            {
+                txtWinOrLose.Text = "YOU LOSE";
+            }
         }
         #endregion
 
