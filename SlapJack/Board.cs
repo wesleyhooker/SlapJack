@@ -186,7 +186,7 @@ namespace SlapJack
             try
 
             {
-                return getTopCard().faceValue == Face.Jack;
+                return getTopCard().Face == "jack";
             }
             catch (NullReferenceException)
 

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Timers;
+using System.Media;
 
 namespace SlapJack
 {
@@ -73,6 +74,9 @@ namespace SlapJack
             {
                 //Place Player card on top of pile
                 PlaceCardInPile(slapJack.players[0]);
+
+                SoundPlayer simpleSound = new SoundPlayer("../../Sounds/deal.wav");
+                simpleSound.Play();
 
                 //Start timer for players to place card
                 while (false)//Not the players turn
