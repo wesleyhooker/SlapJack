@@ -4,9 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="SlapJack" Height="721.35" Width="1018.1" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        Title="SlapJack" Height="721.35" Width="1018.1" WindowStartupLocation="CenterScreen" WindowState="Maximized" Icon="Images/icon3.png">
     <Window.Background>
-        <ImageBrush ImageSource="Images/backGround.jpg"/>
+        <ImageBrush ImageSource="Images/Backgrounds/metalBlue.jpg" TileMode="None" Stretch="UniformToFill"/>
     </Window.Background>
     <!--MAIN GRID-->
     <Grid>
@@ -24,12 +24,12 @@
         </Grid.ColumnDefinitions>
 
         <!--CARDS ON SCREEN-->
-        <Image x:Name="imgPlayerCard" HorizontalAlignment="center" Width="140" Height="195" VerticalAlignment="bottom"  Grid.Column="2"  Grid.Row="1" Source="Images/Cards/back.png" Margin="145,0,148,3" Grid.RowSpan="2" MouseDown="PlayCard" IsEnabled="False">
+        <Image x:Name="imgPlayerCard" HorizontalAlignment="center" Width="140" Height="195" VerticalAlignment="bottom"  Grid.Column="2"  Grid.Row="1" Source="Images/CardBacks/cardBackRed.png" Margin="145,0,148,3" Grid.RowSpan="2" MouseDown="PlayCard" IsEnabled="False">
             <Image.Effect>
                 <DropShadowEffect/>
             </Image.Effect>
         </Image>
-        <Image x:Name="imgNpc1" HorizontalAlignment="left" Width="140" Height="195" VerticalAlignment="center"  Grid.Column="2"  Grid.Row="1" Source="Images/Cards/back.png" Margin="95,77,0,24" >
+        <Image x:Name="imgNpc1" HorizontalAlignment="left" Width="140" Height="195" VerticalAlignment="center"  Grid.Column="2"  Grid.Row="1" Source="Images/CardBacks/cardBackRed.png" Margin="95,77,0,24" >
             <Image.Effect>
                 <DropShadowEffect/>
             </Image.Effect>
@@ -42,12 +42,12 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image x:Name="imgNpc2" HorizontalAlignment="center"  VerticalAlignment="top"  Grid.Column="2" Source="Images/Cards/back.png" Margin="145,3,148,0" Height="195" Grid.RowSpan="2" Width="140">
+        <Image x:Name="imgNpc2" HorizontalAlignment="center"  VerticalAlignment="top"  Grid.Column="2" Source="Images/CardBacks/cardBackRed.png" Margin="145,3,148,0" Height="195" Grid.RowSpan="2" Width="140">
             <Image.Effect>
                 <DropShadowEffect/>
             </Image.Effect>
         </Image>
-        <Image x:Name="imgNpc3" Width="140" Height="196" VerticalAlignment="center"  Grid.Column="3"  Grid.Row="1" Source="Images/Cards/back.png" Margin="100,75,0,25" HorizontalAlignment="Left" Grid.ColumnSpan="2" >
+        <Image x:Name="imgNpc3" Width="140" Height="196" VerticalAlignment="center"  Grid.Column="3"  Grid.Row="1" Source="Images/CardBacks/cardBackRed.png" Margin="100,75,0,25" HorizontalAlignment="Left" Grid.ColumnSpan="2" >
             <Image.Effect>
                 <DropShadowEffect/>
             </Image.Effect>
