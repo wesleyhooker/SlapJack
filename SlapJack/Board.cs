@@ -90,12 +90,25 @@ namespace SlapJack
 
         }
 
+        /// <summary>
+        /// Adds the player's top card to the pile
+        /// </summary>
+        /// <param name="newCard"></param>
         public void addCard(Card newCard)
-
         {
             if (newCard != null)
-
+            {
                 pile.Insert(0, newCard);
+
+                if (lastPlayed != 3)
+                {
+                    lastPlayed++;
+                }
+                else //cycle back to first players turn.
+                {
+                    lastPlayed = 0;
+                }
+            }
         }
 
 
@@ -194,6 +207,23 @@ namespace SlapJack
             {
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Returns the Lowest Npc time to hit;
+        /// </summary>
+        /// <returns></returns>
+        public int getTimeToHit()
+        {
+            double timeToHit = 2;
+            foreach (var player in players)
+            {
+                if (player.getTimeToHit() < timeToHit)
+                {
+                    timeToHit = player.getTimeToHit();
+                }
+            }
+            return (int)(timeToHit*1000);
         }
     }
 }

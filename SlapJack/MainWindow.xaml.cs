@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Timers;
 using System.Media;
+using System.Windows.Threading;
+using System.Threading;
 
 namespace SlapJack
 {
@@ -26,7 +28,11 @@ namespace SlapJack
         /// <summary>
         /// Keeps Track of inGame Time
         /// </summary>
-        static Timer roundTimer;
+        DispatcherTimer roundTimer = null;
+        /// <summary>
+        /// Npc's time to hit
+        /// </summary>
+        DispatcherTimer npcTimeToHit = null;
         /// <summary>
         /// Game Logic
         /// </summary>
@@ -38,6 +44,8 @@ namespace SlapJack
         public MainWindow()
         {
             InitializeComponent();
+            roundTimer  = SetTimer(roundTimer, 2500);
+            roundTimer.Tick += new EventHandler(OnNpcTurn);
         }
         #endregion
 
@@ -59,7 +67,6 @@ namespace SlapJack
             if (roundTimer != null)
             {
                 roundTimer.Stop();
-                roundTimer.Dispose();
             }
         }
 
@@ -82,14 +89,8 @@ namespace SlapJack
                     return;
                 }
 
-                SoundPlayer simpleSound = new SoundPlayer("../../Sounds/deal.wav");
-                simpleSound.Play();
-
-                //Start timer for players to place card
-                while (false)//Not the players turn
-                {
-                    SetTimer();
-                }
+                //Start timer for NPCs to place cards
+                roundTimer.Start();
             }
         }
 
@@ -98,31 +99,40 @@ namespace SlapJack
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Slap(object sender, MouseButtonEventArgs e)
+        private void PlayerSlap(object sender, MouseButtonEventArgs e)
         {
-            //reset Timer
-            while (false) //Not the players turn
-            {
-                SetTimer();
-            }
-
             //Checks for a good or bad slap
-            if (slapJack.pile[0].Face == "Jack")
+            if (slapJack.pile.Count != 0)
             {
-                //Add the pile to the player/NPC Hand
-                slapJack.players[slapJack.pile.Count-1].GetCards(slapJack.pile);
-                imgPile = null;
-                //Check for Player win
-
-            }
-            else //Not a jack
-            {
-                //Place card from player Hand to Pile
-                PlaceCardInPile(slapJack.players[0]);
-                //check for player loss
-                if (slapJack.players[0].getHandCount() == 0)
+                if (slapJack.pile[0].Face == "jack")
                 {
-                    GameResult("LOSE");
+                    //Add the pile to the player/NPC Hand
+                    slapJack.players[0].GetCards(slapJack.pile);
+                    txtCount.Text = "0";
+                    imgPile.Visibility = Visibility.Hidden;
+                    //Check for Player win
+                    if (slapJack.checkWinner() != -1)
+                    {
+                        if (slapJack.checkWinner() != 0)
+                        {
+                            GameResult("LOSS");
+                        }
+                        else
+                        {
+                            GameResult("WIN");
+                        }
+                    }
+                }
+                else //Not a jack
+                {
+                    //Place card from player Hand to Pile
+                    PlaceCardInPile(slapJack.players[0]);
+                    txtCount.Text = slapJack.pile.Count.ToString();
+                    //check for player loss
+                    if (slapJack.players[0].getHandCount() == 0)
+                    {
+                        GameResult("LOSE");
+                    }
                 }
             }
         }
@@ -185,15 +195,23 @@ namespace SlapJack
                         break;
                 }
             }
-            string sCardURI = @"Images/Cards/" + slapJack.pile[0];
+            imgPile.Visibility = Visibility.Visible;
+            string sCardURI = @"Images/Cards/" + slapJack.getTopCard();
             imgPile.Source = new BitmapImage(new Uri(sCardURI, UriKind.RelativeOrAbsolute));
+            txtCount.Text = slapJack.pile.Count.ToString();
+
+            SoundPlayer simpleSound = new SoundPlayer("../../Sounds/deal.wav");
+            simpleSound.Play();
         }
+
 
         private void GameResult(string WinOrLose)
         {
             imgPlayerCard.IsEnabled = false;
             canImgPile.IsEnabled = false;
             slapJack = null;
+            roundTimer.Stop();
+            npcTimeToHit.Stop();
             if (WinOrLose == "WIN")
             {
                 txtWinOrLose.Text = "YOU WIN";
@@ -207,14 +225,13 @@ namespace SlapJack
 
 
         #region TIMER METHODS
-        private static void SetTimer()
+        private DispatcherTimer SetTimer(DispatcherTimer timer, int miliseconds)
         {
             // Create a timer with a two second interval.
-            roundTimer = new Timer(2000);
+            timer = new DispatcherTimer();
             // Hook up the Elapsed event for the timer. 
-            roundTimer.AutoReset = false;
-            roundTimer.Enabled = true;
-            roundTimer.Elapsed += OnTimedEvent;
+            timer.Interval = new TimeSpan(0, 0, 0, 0, miliseconds);
+            return timer;
         }
 
         /// <summary>
@@ -222,9 +239,58 @@ namespace SlapJack
         /// </summary>
         /// <param name="source"></param>
         /// <param name="e"></param>
-        private static void OnTimedEvent(Object source, ElapsedEventArgs e)
+        private void OnNpcTurn(object sender, EventArgs e)
         {
-            //Place NPC Hand card to top of pile.
+            if (slapJack.lastPlayed != 0 || slapJack.players[0].hand.Count() == 0)
+            {
+                //Place NPC Hand card to top of pile. 
+                PlaceCardInPile(slapJack.players[(slapJack.lastPlayed)]);
+                //hit after a certain time if jack
+                npcTimeToHit = SetTimer(npcTimeToHit, slapJack.getTimeToHit());
+                npcTimeToHit.Tick += new EventHandler(OnNpcHit);
+                if (slapJack.getTopCard().Face == "jack")
+                {
+                    npcTimeToHit.Start();
+                }
+            }
+            else
+            {
+                //pause timer
+                roundTimer.Stop();
+            }
+        }
+
+        /// <summary>
+        /// When the NPC hits the jack
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnNpcHit(object sender, EventArgs e)
+        {
+            //Checks for a good or bad slap
+            if (slapJack.pile.Count != 0)
+            {
+                if (slapJack.pile[0].Face == "jack")
+                {
+                    //Add the pile to the player/NPC Hand
+                    slapJack.players[slapJack.lastPlayed].GetCards(slapJack.pile);
+                    txtCount.Text = "0";
+                    imgPile.Visibility = Visibility.Hidden;
+                    //Check for Player win
+                    if (slapJack.checkWinner() != -1)
+                    {
+                        if (slapJack.checkWinner() == 0)
+                        {
+                            GameResult("WIN");
+                        }
+                        else
+                        {
+                            GameResult("LOSS");
+                        }
+                    }
+                }
+            }
+            npcTimeToHit.Stop();
         }
         #endregion
     }

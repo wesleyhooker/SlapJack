@@ -66,7 +66,7 @@
             <Border.Effect>
                 <DropShadowEffect BlurRadius="199"/>
             </Border.Effect>
-            <Canvas x:Name="canImgPile" IsEnabled="False" Height="278" Width="190" MouseEnter="CanImgPile_MouseEnter" MouseLeave="CanImgPile_MouseLeave" PreviewMouseDown="Slap" >
+            <Canvas x:Name="canImgPile" IsEnabled="False" Height="278" Width="190" MouseEnter="CanImgPile_MouseEnter" MouseLeave="CanImgPile_MouseLeave" PreviewMouseDown="PlayerSlap" >
                 <Viewbox Height="278" Width=" 190" >
                     <Image x:Name="imgPile" Grid.Column="1" Grid.Row="1"  Cursor="Hand" Canvas.Left="-65" Canvas.Top="-132">
                         <Image.Effect>
@@ -83,5 +83,6 @@
         <Rectangle Fill="Black" Stroke="Black"   Grid.RowSpan="3" Grid.Column="4"/>
         <Button x:Name="newGame" Content="New Game" Grid.Column="4" HorizontalAlignment="Left" Margin="54,10,0,0" VerticalAlignment="Top" Width="75" Click="NewGame_Click"/>
         <TextBlock x:Name="txtWinOrLose" Grid.Column="4" HorizontalAlignment="Left" Margin="79,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White"/>
+        <TextBlock x:Name="txtCount" Grid.Column="2" HorizontalAlignment="Left" Margin="209,10,0,0" Grid.Row="1" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
