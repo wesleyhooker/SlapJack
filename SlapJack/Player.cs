@@ -76,6 +76,7 @@ namespace SlapJack
                 hand[y] = hand[n];
                 hand[n] = value;
             }
+        }
 
         //Gives a double between the min and max values to determine how long until a player slaps
         public Double getTimeToHit()
