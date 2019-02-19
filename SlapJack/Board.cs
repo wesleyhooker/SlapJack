@@ -12,7 +12,7 @@ namespace SlapJack
         public List<Card> pile;
         public List<Player> players { get; }
         private Deck deck;
-        public int lastPlayed { get; set; }
+        public int currentPlayer { get; set; }
 
 
         public Card getTopCard()
@@ -53,7 +53,7 @@ namespace SlapJack
                 players.Add(new Player(playerId));
             }
 
-            lastPlayed = 0;
+            currentPlayer = 0;
 
             //deal players their cards
 
@@ -100,13 +100,13 @@ namespace SlapJack
             {
                 pile.Insert(0, newCard);
 
-                if (lastPlayed != 3)
+                if (currentPlayer != 3)
                 {
-                    lastPlayed++;
+                    currentPlayer++;
                 }
                 else //cycle back to first players turn.
                 {
-                    lastPlayed = 0;
+                    currentPlayer = 0;
                 }
             }
         }
@@ -146,7 +146,7 @@ namespace SlapJack
         public Card playerFlipped(int playerId)
 
         {
-            if (playerId != lastPlayed)
+            if (playerId != currentPlayer)
 
             {
                 Card card = getPlayer(playerId).Flip();
@@ -157,7 +157,7 @@ namespace SlapJack
 
                 //addCard(card);
 
-                lastPlayed = playerId;
+                currentPlayer = playerId;
 
                 return card;
             }

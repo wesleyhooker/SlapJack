@@ -24,7 +24,7 @@
         </Grid.ColumnDefinitions>
 
         <!--CARDS ON SCREEN-->
-        <Image x:Name="imgPlayerCard" HorizontalAlignment="center" Width="140" Height="195" VerticalAlignment="bottom"  Grid.Column="2"  Grid.Row="1" Source="Images/CardBacks/cardBackRed.png" Margin="145,0,148,3" Grid.RowSpan="2" MouseDown="PlayCard" IsEnabled="False">
+        <Image x:Name="imgPlayerCard" HorizontalAlignment="center" Width="140" Height="195" VerticalAlignment="bottom"  Grid.Column="2"  Grid.Row="1" Source="Images/CardBacks/cardBackRed.png" Margin="145,0,148,3" Grid.RowSpan="2" MouseDown="PlayerPlayCard" IsEnabled="False">
             <Image.Effect>
                 <DropShadowEffect/>
             </Image.Effect>
@@ -74,6 +74,7 @@
                         </Image.Effect>
                     </Image>
                 </Viewbox>
+                <TextBlock x:Name="txtCount" HorizontalAlignment="Right" Text="0" VerticalAlignment="Top" Canvas.Left="169" Height="18" Width="21" Canvas.Top="10"/>
                 <TextBox Visibility="Hidden" x:Name="txtImgPile" Grid.Column="1" IsReadOnly="True" HorizontalAlignment="Center"  Grid.Row="1" TextWrapping="Wrap" Text="SLAP" VerticalAlignment="Center" Height="100" Width="308" Foreground="Black" Background="{x:Null}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Focusable="False" FontSize="48" FontWeight="Bold" FontFamily="Wide Latin" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Canvas.Left="-46" Canvas.Top="98" AllowDrop="False" IsTabStop="False" BorderThickness="0"/>
             </Canvas>
         </Border>
@@ -83,6 +84,5 @@
         <Rectangle Fill="Black" Stroke="Black"   Grid.RowSpan="3" Grid.Column="4"/>
         <Button x:Name="newGame" Content="New Game" Grid.Column="4" HorizontalAlignment="Left" Margin="54,10,0,0" VerticalAlignment="Top" Width="75" Click="NewGame_Click"/>
         <TextBlock x:Name="txtWinOrLose" Grid.Column="4" HorizontalAlignment="Left" Margin="79,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White"/>
-        <TextBlock x:Name="txtCount" Grid.Column="2" HorizontalAlignment="Left" Margin="209,10,0,0" Grid.Row="1" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

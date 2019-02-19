@@ -26,13 +26,13 @@ namespace SlapJack
     {
         #region VARIABLES
         /// <summary>
-        /// Keeps Track of inGame Time
+        /// The timer for NPC's to place their card in the pile
         /// </summary>
-        DispatcherTimer roundTimer = null;
+        DispatcherTimer timerNpcTimeToPlace = null;
         /// <summary>
-        /// Npc's time to hit
+        /// The timer for Npc's to hit the Jack
         /// </summary>
-        DispatcherTimer npcTimeToHit = null;
+        DispatcherTimer timerNpcTimeToHit = null;
         /// <summary>
         /// Game Logic
         /// </summary>
@@ -44,8 +44,8 @@ namespace SlapJack
         public MainWindow()
         {
             InitializeComponent();
-            roundTimer  = SetTimer(roundTimer, 2500);
-            roundTimer.Tick += new EventHandler(OnNpcTurn);
+            timerNpcTimeToPlace  = SetTimer(timerNpcTimeToPlace, 2500);
+            timerNpcTimeToPlace.Tick += new EventHandler(OnNpcTurn);
         }
         #endregion
 
@@ -64,9 +64,9 @@ namespace SlapJack
             slapJack = new Board();
 
             //Reset timer
-            if (roundTimer != null)
+            if (timerNpcTimeToPlace != null)
             {
-                roundTimer.Stop();
+                timerNpcTimeToPlace.Stop();
             }
         }
 
@@ -75,9 +75,9 @@ namespace SlapJack
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void PlayCard(object sender, MouseButtonEventArgs e)
+        private void PlayerPlayCard(object sender, MouseButtonEventArgs e)
         {
-            if (slapJack.lastPlayed == 0) //if it is the players turn
+            if (slapJack.currentPlayer == 0) //if it is the players turn
             {
                 //Place Player card on top of pile
                 if (slapJack.players[0].getHandCount() != 0)
@@ -90,7 +90,7 @@ namespace SlapJack
                 }
 
                 //Start timer for NPCs to place cards
-                roundTimer.Start();
+                timerNpcTimeToPlace.Start();
             }
         }
 
@@ -101,40 +101,7 @@ namespace SlapJack
         /// <param name="e"></param>
         private void PlayerSlap(object sender, MouseButtonEventArgs e)
         {
-            //Checks for a good or bad slap
-            if (slapJack.pile.Count != 0)
-            {
-                if (slapJack.pile[0].Face == "jack")
-                {
-                    //Add the pile to the player/NPC Hand
-                    slapJack.players[0].GetCards(slapJack.pile);
-                    txtCount.Text = "0";
-                    imgPile.Visibility = Visibility.Hidden;
-                    //Check for Player win
-                    if (slapJack.checkWinner() != -1)
-                    {
-                        if (slapJack.checkWinner() != 0)
-                        {
-                            GameResult("LOSS");
-                        }
-                        else
-                        {
-                            GameResult("WIN");
-                        }
-                    }
-                }
-                else //Not a jack
-                {
-                    //Place card from player Hand to Pile
-                    PlaceCardInPile(slapJack.players[0]);
-                    txtCount.Text = slapJack.pile.Count.ToString();
-                    //check for player loss
-                    if (slapJack.players[0].getHandCount() == 0)
-                    {
-                        GameResult("LOSE");
-                    }
-                }
-            }
+            Hit(slapJack.players[0]);
         }
 
         /// <summary>
@@ -172,46 +139,32 @@ namespace SlapJack
         /// <param name="player"></param>
         private void PlaceCardInPile(Player player)
         {
+            //Player/NPC Hand
             slapJack.addCard(player.PlayCard());
+            DisplayHand(player);
 
-            //Pile Card Image
-            if (player.getHandCount() == 0)
-            {
-                switch (player.id)
-                {
-                    case 0:
-                        imgPlayerCard.Source = null;
-                        break;
-                    case 1:
-                        imgNpc1.Source = null;
-                        break;
-                    case 2:
-                        imgNpc2.Source = null;
-                        break;
-                    case 3:
-                        imgNpc3.Source = null;
-                        break;
-                    default:
-                        break;
-                }
-            }
+            //Pile
             imgPile.Visibility = Visibility.Visible;
             string sCardURI = @"Images/Cards/" + slapJack.getTopCard();
             imgPile.Source = new BitmapImage(new Uri(sCardURI, UriKind.RelativeOrAbsolute));
             txtCount.Text = slapJack.pile.Count.ToString();
 
+            //Sound for Placing Card in Pile
             SoundPlayer simpleSound = new SoundPlayer("../../Sounds/deal.wav");
             simpleSound.Play();
         }
 
-
+        /// <summary>
+        /// Carries out the event of a Win or Loss
+        /// </summary>
+        /// <param name="WinOrLose"></param>
         private void GameResult(string WinOrLose)
         {
             imgPlayerCard.IsEnabled = false;
             canImgPile.IsEnabled = false;
             slapJack = null;
-            roundTimer.Stop();
-            npcTimeToHit.Stop();
+            timerNpcTimeToPlace.Stop();
+            timerNpcTimeToHit.Stop();
             if (WinOrLose == "WIN")
             {
                 txtWinOrLose.Text = "YOU WIN";
@@ -219,6 +172,97 @@ namespace SlapJack
             else
             {
                 txtWinOrLose.Text = "YOU LOSE";
+            }
+        }
+
+        /// <summary>
+        /// Displays or Hides the players UI Hand based on their hand count
+        /// </summary>
+        /// <param name="player"></param>
+        private void DisplayHand(Player player)
+        {
+            //Pile Card Image
+            if (player.getHandCount() != 0)
+            {
+                switch (player.id)
+                {
+                    case 0:
+                        imgPlayerCard.Visibility = Visibility.Visible;
+                        break;
+                    case 1:
+                        imgNpc1.Visibility = Visibility.Visible;
+                        break;
+                    case 2:
+                        imgNpc2.Visibility = Visibility.Visible;
+                        break;
+                    case 3:
+                        imgNpc3.Visibility = Visibility.Visible;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                switch (player.id)
+                {
+                    case 0:
+                        imgPlayerCard.Visibility = Visibility.Hidden;
+                        break;
+                    case 1:
+                        imgNpc1.Visibility = Visibility.Hidden;
+                        break;
+                    case 2:
+                        imgNpc2.Visibility = Visibility.Hidden;
+                        break;
+                    case 3:
+                        imgNpc3.Visibility = Visibility.Hidden;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void Hit(Player player)
+        {
+            if (slapJack.pile.Count != 0) //You cant hit a pile with 0 cards
+            {
+                if (slapJack.pile[0].Face == "jack")
+                {
+                    //Hand
+                    slapJack.players[player.id].GetCards(slapJack.pile);
+                    DisplayHand(slapJack.players[player.id]);
+
+                    //Pile
+                    txtCount.Text = "0";
+                    imgPile.Visibility = Visibility.Hidden;
+
+                    //Check for Player Win/Loss
+                    if (slapJack.checkWinner() != -1)
+                    {
+                        if (slapJack.checkWinner() == 0)
+                        {
+                            GameResult("WIN");
+                        }
+                        else
+                        {
+                            GameResult("LOSS");
+                        }
+                    }
+                }
+                else //Hits a non-jack
+                {
+                    //Place a hand-card in the pile
+                    PlaceCardInPile(slapJack.players[player.id]);
+                    txtCount.Text = slapJack.pile.Count.ToString();
+
+                    //check for loss
+                    if (slapJack.players[player.id].getHandCount() == 0)
+                    {
+                        GameResult("LOSE");
+                    }
+                }
             }
         }
         #endregion
@@ -241,28 +285,29 @@ namespace SlapJack
         /// <param name="e"></param>
         private void OnNpcTurn(object sender, EventArgs e)
         {
-            if (slapJack.lastPlayed != 0 || slapJack.players[0].hand.Count() == 0)
+            if (slapJack.currentPlayer != 0 || slapJack.players[0].hand.Count() == 0)
             {
                 //Place NPC Hand card to top of pile. 
-                if (slapJack.players[(slapJack.lastPlayed)].hand.Count != 0)
+                if (slapJack.players[(slapJack.currentPlayer)].hand.Count != 0)
                 {
-                    PlaceCardInPile(slapJack.players[(slapJack.lastPlayed)]);
+                    PlaceCardInPile(slapJack.players[(slapJack.currentPlayer)]);
                 }
+
                 //hit after a certain time if jack
-                npcTimeToHit = SetTimer(npcTimeToHit, slapJack.getTimeToHit());
-                npcTimeToHit.Tick += new EventHandler(OnNpcHit);
+                timerNpcTimeToHit = SetTimer(timerNpcTimeToHit, slapJack.getTimeToHit());
+                timerNpcTimeToHit.Tick += new EventHandler(OnNpcHit);
                 if (slapJack.pile.Count != 0)
                 {
                     if (slapJack.getTopCard().Face == "jack")
                     {
-                        npcTimeToHit.Start();
+                        timerNpcTimeToHit.Start();
                     }
                 }
             }
             else
             {
                 //pause timer
-                roundTimer.Stop();
+                timerNpcTimeToPlace.Stop();
             }
         }
 
@@ -273,30 +318,12 @@ namespace SlapJack
         /// <param name="e"></param>
         private void OnNpcHit(object sender, EventArgs e)
         {
-            //Checks for a good or bad slap
-            if (slapJack.pile.Count != 0)
-            {
-                if (slapJack.pile[0].Face == "jack")
-                {
-                    //Add the pile to the player/NPC Hand
-                    slapJack.players[slapJack.lastPlayed].GetCards(slapJack.pile);
-                    txtCount.Text = "0";
-                    imgPile.Visibility = Visibility.Hidden;
-                    //Check for Player win
-                    if (slapJack.checkWinner() != -1)
-                    {
-                        if (slapJack.checkWinner() == 0)
-                        {
-                            GameResult("WIN");
-                        }
-                        else
-                        {
-                            GameResult("LOSS");
-                        }
-                    }
-                }
-            }
-            npcTimeToHit.Stop();
+            //NPC Hit
+            Hit(slapJack.players[slapJack.currentPlayer]);
+
+            //Stop the timer for NPC to Hit 
+            //(Timers are on loops and if you dont stop the timer then the NPC will hit the pile over and over)
+            timerNpcTimeToHit.Stop();
         }
         #endregion
     }
