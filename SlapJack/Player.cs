@@ -59,8 +59,23 @@ namespace SlapJack
                 Card gotCard = pile[i];
                 hand.Add(gotCard);                
             }
-            pile.Clear();           
+            pile.Clear(); 
+            ShuffleHand();
         }
+        
+        //Shuffles the players hand
+        public void ShuffleHand()
+        {
+            Random rnd = new Random();
+            int n = hand.Count;
+            while (n > 1)
+            {
+                n--;
+                int y = rnd.Next(n + 1);
+                Card value = hand[y];
+                hand[y] = hand[n];
+                hand[n] = value;
+            }
 
         //Gives a double between the min and max values to determine how long until a player slaps
         public Double getTimeToHit()
