@@ -244,13 +244,19 @@ namespace SlapJack
             if (slapJack.lastPlayed != 0 || slapJack.players[0].hand.Count() == 0)
             {
                 //Place NPC Hand card to top of pile. 
-                PlaceCardInPile(slapJack.players[(slapJack.lastPlayed)]);
+                if (slapJack.players[(slapJack.lastPlayed)].hand.Count != 0)
+                {
+                    PlaceCardInPile(slapJack.players[(slapJack.lastPlayed)]);
+                }
                 //hit after a certain time if jack
                 npcTimeToHit = SetTimer(npcTimeToHit, slapJack.getTimeToHit());
                 npcTimeToHit.Tick += new EventHandler(OnNpcHit);
-                if (slapJack.getTopCard().Face == "jack")
+                if (slapJack.pile.Count != 0)
                 {
-                    npcTimeToHit.Start();
+                    if (slapJack.getTopCard().Face == "jack")
+                    {
+                        npcTimeToHit.Start();
+                    }
                 }
             }
             else
