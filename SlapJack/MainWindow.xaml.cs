@@ -62,6 +62,7 @@ namespace SlapJack
             imgPlayerCard.IsEnabled = true;
             canImgPile.IsEnabled = true;
             slapJack = new Board();
+            txtStatus.Content = "Click bottom pile";
 
             //Reset timer
             if (timerNpcTimeToPlace != null)
@@ -181,6 +182,9 @@ namespace SlapJack
         /// <param name="player"></param>
         private void DisplayHand(Player player)
         {
+            // Update status text
+            DisplayStatus(player);
+
             //Pile Card Image
             if (player.getHandCount() != 0)
             {
@@ -221,6 +225,31 @@ namespace SlapJack
                     default:
                         break;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Upate status text to indicate current players turn.
+        /// </summary>
+        /// <param name="player"></param>
+        private void DisplayStatus(Player player)
+        {
+            switch (player.id)
+            {
+                case 0:
+                    txtStatus.Content = "NPC 1's turn";
+                    break;
+                case 1:
+                    txtStatus.Content = "NPC 2's turn";
+                    break;
+                case 2:
+                    txtStatus.Content = "NPC 3's turn";
+                    break;
+                case 3:
+                    txtStatus.Content = "Your turn";
+                    break;
+                default:
+                    break;
             }
         }
 

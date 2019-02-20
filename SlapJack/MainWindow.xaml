@@ -6,7 +6,7 @@
         mc:Ignorable="d"
         Title="SlapJack" Height="721.35" Width="1018.1" WindowStartupLocation="CenterScreen" WindowState="Maximized" Icon="Images/icon3.png">
     <Window.Background>
-        <ImageBrush ImageSource="Images/Backgrounds/metalBlue.jpg" TileMode="None" Stretch="UniformToFill"/>
+        <ImageBrush ImageSource="Images/Backgrounds/blue.jpg" TileMode="None" Stretch="UniformToFill"/>
     </Window.Background>
     <!--MAIN GRID-->
     <Grid>
@@ -74,7 +74,7 @@
                         </Image.Effect>
                     </Image>
                 </Viewbox>
-                <TextBlock x:Name="txtCount" HorizontalAlignment="Right" Text="0" VerticalAlignment="Top" Canvas.Left="169" Height="18" Width="21" Canvas.Top="10"/>
+                <TextBlock x:Name="txtCount" HorizontalAlignment="Right" Text="0" VerticalAlignment="Top" Canvas.Left="169" Height="18" Width="21" Canvas.Top="10" Foreground="Black"/>
                 <TextBox Visibility="Hidden" x:Name="txtImgPile" Grid.Column="1" IsReadOnly="True" HorizontalAlignment="Center"  Grid.Row="1" TextWrapping="Wrap" Text="SLAP" VerticalAlignment="Center" Height="100" Width="308" Foreground="Black" Background="{x:Null}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Focusable="False" FontSize="48" FontWeight="Bold" FontFamily="Wide Latin" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand" Canvas.Left="-46" Canvas.Top="98" AllowDrop="False" IsTabStop="False" BorderThickness="0"/>
             </Canvas>
         </Border>
@@ -84,5 +84,6 @@
         <Rectangle Fill="Black" Stroke="Black"   Grid.RowSpan="3" Grid.Column="4"/>
         <Button x:Name="newGame" Content="New Game" Grid.Column="4" HorizontalAlignment="Left" Margin="54,10,0,0" VerticalAlignment="Top" Width="75" Click="NewGame_Click"/>
         <TextBlock x:Name="txtWinOrLose" Grid.Column="4" HorizontalAlignment="Left" Margin="79,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White"/>
+        <Label x:Name="txtStatus" Content="Press new game" HorizontalAlignment="Left" Height="38" Margin="10,66,0,0" VerticalAlignment="Top" Width="156" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16"/>
     </Grid>
 </Window>
