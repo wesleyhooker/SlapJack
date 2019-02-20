@@ -316,17 +316,6 @@ namespace SlapJack
         {
             if (slapJack.currentPlayer != 0 || slapJack.players[0].hand.Count() == 0)
             {
-                if (slapJack.players[slapJack.currentPlayer].getHandCount() == 0)
-                {
-                    if (slapJack.currentPlayer == 3)
-                    {
-                        slapJack.currentPlayer = 0;
-                    }
-                    else
-                    {
-                        slapJack.currentPlayer++;
-                    }
-                }
                 //Place NPC Hand card to top of pile. 
                 if (slapJack.players[(slapJack.currentPlayer)].hand.Count != 0)
                 {
